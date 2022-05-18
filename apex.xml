@@ -154,4 +154,49 @@
 			</property>
 		</properties>
 	</rule>
+	<rule
+		name="CouldUseAssertForBooleanComparison"
+		language="apex"
+		message="For boolean comparisons, use System.assert"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//MethodCallExpression[lower-case(@FullMethodName)='system.assertequals']/LiteralExpression[@Boolean='true']
+    				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	<rule
+		name="DontUseAlwaysFailingAssert"
+		language="apex"
+		message="Replace always failing assert with boolean flag"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//MethodCallExpression[lower-case(@FullMethodName)='system.assert']/LiteralExpression[@Boolean='true' and @LiteralType='FALSE']
+    				]]>
+				</value>
+			</property>
+		</properties>
+		<example>
+			[<![CDATA[
+				Boolean operationFailed = false;
+				try {
+					operationThatShouldFail();
+				} catch(Exception e) {
+					operationFailed = true;
+				}
+				System.assert(operationFailed, 'Operation should fail');
+			]]>
+		</example>
+	</rule>
 </ruleset>
