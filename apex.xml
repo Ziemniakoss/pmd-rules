@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset
+	xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	name="My Apex rules"
+	xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd"
+>
+	<description>Default ruleset for PMD</description>
+	<rule
+		name="AvoidNestedMaps"
+		language="apex"
+		message="Avoid complex generic types like map of maps or list of lists"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<description>
+			Using complex generic types makes source code difficult to read.
+			Consider using custom classes.
+		</description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//Field[matches(@Type, 'Map<.*>>$')]
+    				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	<rule
+		name="MessagesShouldNotBeHardcoded"
+		language="apex"
+		message="Messages for exceptions and errors should be stored in labels"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//ThrowStatement/NewObjectExpression/LiteralExpression[@LiteralType='STRING']
+    					| //MethodCallExpression[lower-case(@MethodName)='adderror']/LiteralExpression[@LiteralType='STRING']
+    				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	<rule
+		name="BooleanMethodsShouldNotReturnNull"
+		language="apex"
+		message="Methods returning boolean value shouldn't return null"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//Method[@ReturnType='Boolean']//ReturnStatement/LiteralExpression[@Null='true']
+    				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	<rule
+		name="NumericMethodsShouldNotReturnNull"
+		language="apex"
+		message="Methods returning numeric valus shouldn't return null"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//Method[
+    						@ReturnType='Integer'
+    						or @ReturnType='Decimal'
+    						or @ReturnType='Double'
+    						or @ReturnType='Long'
+    					]//ReturnStatement/LiteralExpression[@Null='true']
+    				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	<rule
+		name="UseIsEmpty"
+		language="apex"
+		message="Could be replaced by isEmpty() call"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//BooleanExpression[@Operator='==']/MethodCallExpression[@MethodName='size']/following::LiteralExpression[@Image='0']
+    					| //BooleanExpression[@Operator='!=']/MethodCallExpression[@MethodName='size']/following::LiteralExpression[@Image='0']
+    					| //BooleanExpression[@Operator='>']/MethodCallExpression[@MethodName='size']/following::LiteralExpression[@Image='0']
+    				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	<rule
+		name="ProhibitGetRecordTypeInfosByName"
+		language="apex"
+		message="Use getRecordTypeInfosByDeveloperName instead"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//MethodCallExpression[lower-case(@MethodName)='getrecordtypeinfosbyname']
+    				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	<rule
+		name="SoqlWithoutWhereAndLimit"
+		language="apex"
+		message="Use where or limit clause"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//SoqlExpression[not(matches(@CanonicalQuery, "(.*[fF][rR][oO][mM].*(\s([wW][hH][eE][rR][eE])|([lL][iI][mM][iI][tT])\s).*)"))]
+    				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	<rule
+		name="ReturnCanBeLiftedOutsideElse"
+		language="apex"
+		message="This return can be lifted out of else clause"
+		class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule"
+	>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+    					//IfElseBlockStatement/BlockStatement/ReturnStatement
+    				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+</ruleset>
