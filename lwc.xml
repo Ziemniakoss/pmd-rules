@@ -10,6 +10,7 @@
 		name="DontUseCustomEvent"
 		language="ecmascript"
 		message="Avoid using standard CustomEvent class, declare subclass"
+		externalInfoUrl="https://github.com/Ziemniakoss/pmd-rules/wiki/LWC#dontusecustomevent"
 		class="net.sourceforge.pmd.lang.rule.XPathRule"
 	>
 		<description>
