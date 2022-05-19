@@ -2,3 +2,4 @@
 *.iml
 *.cls
 tree.xml
+/examples/
