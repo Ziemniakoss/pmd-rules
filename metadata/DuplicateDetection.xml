@@ -1,85 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset
-    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    name="Duplicate Metadata Detection Rules"
-    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd"
+        xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        name="Duplicate Metadata Detection Rules"
+        xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd"
 >
     <description>Rules for Custom Labels</description>
     <rule name="DetectDuplicateCustomLabels" message="Duplicate Custom Label detected"
-        class="net.sourceforge.pmd.lang.rule.XPathRule" language="xml">
+          class="net.sourceforge.pmd.lang.rule.XPathRule" language="xml">
         <properties>
             <property name="xpath">
                 <value>
-//labels[
-    fullName/text/@Image = following::labels/fulllName/text/@Image
-        or 
-    fullName/text/@Image = preceding::labels/fullName/text/@Image
-]
+                    //labels[
+                    fullName/text/@Image = following::labels/fulllName/text/@Image
+                    or
+                    fullName/text/@Image = preceding::labels/fullName/text/@Image
+                    ]
                 </value>
             </property>
         </properties>
     </rule>
     <rule name="DuplicateFieldPermission" language="xml"
-        class="net.sourceforge.pmd.lang.rule.XPathRule"
-        message="Detected duplicate field permissions"
+          class="net.sourceforge.pmd.lang.rule.XPathRule"
+          message="Detected duplicate field permissions"
     >
         <properties>
             <property name="xpath">
                 <value>
- //fieldPermissions[
-    lower-case(field/text/@Image) = lower-case(following::fieldPermissions/field/text/@Image)
-        or 
-    lower-case(field/text/@Image) = lower-case(preceding::fieldPermissions/field/text/@Image)
-]                   
+                    //fieldPermissions[
+                    lower-case(field/text/@Image) = lower-case(following::fieldPermissions/field/text/@Image)
+                    or
+                    lower-case(field/text/@Image) = lower-case(preceding::fieldPermissions/field/text/@Image)
+                    ]
                 </value>
             </property>
         </properties>
     </rule>
     <rule name="DuplicateObjectPermission" language="xml"
-        class="net.sourceforge.pmd.lang.rule.XPathRule"
-        message="Detected duplicate object permissions"
+          class="net.sourceforge.pmd.lang.rule.XPathRule"
+          message="Detected duplicate object permissions"
     >
         <properties>
             <property name="xpath">
                 <value>
- //objectPermissions[
-    lower-case(object/text/@Image) = lower-case(following::objectPermissions/object/text/@Image)
-        or 
-    lower-case(object/text/@Image) = lower-case(preceding::objectPermissions/object/text/@Image)
-]                   
+                    //objectPermissions[
+                    lower-case(object/text/@Image) = lower-case(following::objectPermissions/object/text/@Image)
+                    or
+                    lower-case(object/text/@Image) = lower-case(preceding::objectPermissions/object/text/@Image)
+                    ]
                 </value>
             </property>
         </properties>
     </rule>
     <rule name="DuplicateTabVisibility" language="xml"
-        class="net.sourceforge.pmd.lang.rule.XPathRule"
-        message="Detected duplicate tab visiblity"
+          class="net.sourceforge.pmd.lang.rule.XPathRule"
+          message="Detected duplicate tab visiblity"
     >
         <properties>
             <property name="xpath">
                 <value>
- //tabVisibilities[
-    lower-case(tab/text/@Image) = lower-case(following::tabVisibilities/tab/text/@Image)
-        or 
-    lower-case(tab/text/@Image) = lower-case(preceding::tabVisibilities/tab/text/@Image)
-]                   
+                    //tabVisibilities[
+                    lower-case(tab/text/@Image) = lower-case(following::tabVisibilities/tab/text/@Image)
+                    or
+                    lower-case(tab/text/@Image) = lower-case(preceding::tabVisibilities/tab/text/@Image)
+                    ]
                 </value>
             </property>
         </properties>
     </rule>
     <rule name="DuplicateClassAccess" language="xml"
-        class="net.sourceforge.pmd.lang.rule.XPathRule"
-        message="Detected duplicate class access"
+          class="net.sourceforge.pmd.lang.rule.XPathRule"
+          message="Detected duplicate class access"
     >
         <properties>
             <property name="xpath">
                 <value>
- //classAccesses[
-    lower-case(apexClass/text/@Image) = lower-case(following::classAccesses/apexClass/text/@Image)
-        or 
-    lower-case(apexClass/text/@Image) = lower-case(preceding::classAccesses/apexClass/text/@Image)
-]                   
+                    //classAccesses[
+                    lower-case(apexClass/text/@Image) = lower-case(following::classAccesses/apexClass/text/@Image)
+                    or
+                    lower-case(apexClass/text/@Image) = lower-case(preceding::classAccesses/apexClass/text/@Image)
+                    ]
                 </value>
             </property>
         </properties>
