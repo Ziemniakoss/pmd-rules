@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="My Apex rules"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd"
+>
+    <description>Rules for Custom Labels</description>
+    <rule name="DetectDuplicateCustomLabels" message="Duplicate Custom Label detected"
+        class="net.sourceforge.pmd.lang.rule.XPathRule" language="xml">
+        <properties>
+            <property name="xpath">
+                <value>
+//labels[
+    descendant-or-self::fullName/text/@Image = following::labels/descendant-or-self::fulllName/text/@Image
+        or 
+    descendant-or-self::fullName/text/@Image = preceding::labels/descendant-or-self::fullName/text/@Image
+]
+                </value>
+            </property>
+        </properties>
+    </rule>
+</ruleset>
